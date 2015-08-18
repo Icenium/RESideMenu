@@ -30,17 +30,24 @@
 
 - (void)re_displayController:(UIViewController *)controller frame:(CGRect)frame
 {
-    [self addChildViewController:controller];
+    [controller willMoveToParentViewController:self];
     controller.view.frame = frame;
     [self.view addSubview:controller.view];
+    [controller beginAppearanceTransition:YES animated:YES];
+    [self addChildViewController:controller];
     [controller didMoveToParentViewController:self];
+    [controller endAppearanceTransition];
 }
 
 - (void)re_hideController:(UIViewController *)controller
 {
     [controller willMoveToParentViewController:nil];
+    [controller beginAppearanceTransition:NO animated:NO];
+    [controller.parentViewController beginAppearanceTransition:YES animated:NO];
     [controller.view removeFromSuperview];
+    [controller.parentViewController endAppearanceTransition];
     [controller removeFromParentViewController];
+    [controller endAppearanceTransition];
 }
 
 - (RESideMenu *)sideMenuViewController
