@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source_files = 'RESideMenu'
   s.public_header_files = 'RESideMenu/*.h'
-
+  s.xcconfig = { 'OTHER_LDFLAGS' => '-lObjCTest' }
   s.ios.deployment_target = '6.0'
   s.ios.frameworks = 'QuartzCore'
 end
